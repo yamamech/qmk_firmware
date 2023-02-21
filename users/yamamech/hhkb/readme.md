@@ -1,6 +1,6 @@
 # HHKB Pro Classic (PD-KB401) Userspace
 
-![HHKB keyboard layout](https://deskthority.net/wiki/images/d/de/HHKB_Pro_2_-_keyboard_layout_editor_-_final_with_sun.png)
+![HHKB keyboard layout](https://github.com/yamamech/hhkb_qmk_resources/blob/main/img/keyboard-layout.png?raw=true)
 
 ## DIP Switch Configuration
 
