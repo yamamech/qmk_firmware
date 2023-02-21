@@ -1,4 +1,4 @@
-/* Copyright 2022 Yamamech
+/* Copyright 2023 Yamamech
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,6 +21,10 @@
 #define FN      MO(_FN)
 #define LM_LALT LM(_LM, MOD_LALT)
 // clang-format on
+
+#if defined(HHKB_ENABLE)
+#    include "hhkb/hhkb.h"
+#endif
 
 enum layers { _BASE = 0, _FN, _LM };
 

@@ -14,24 +14,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "yamamech.h"
+#pragma once
+
 #include "quantum.h"
 
-// Keymap-specific process_record_user()
-__attribute__((weak)) bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
-    return true;
-}
+bool process_record_hhkb(uint16_t keycode, keyrecord_t *record);
+bool code_if_macos(uint16_t keycode, bool pressed);
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (!process_record_keymap(keycode, record)) {
-        return false;
-    }
+typedef union {
+    uint8_t raw;
+    struct {
+        uint8_t layout : 2;
+        bool    sw3 : 1;
+        bool    sw4 : 1;
+        bool    sw5 : 1;
+        bool    sw6 : 1;
+    };
+} hhkb_dip_switch_config_t;
 
-#if defined(HHKB_ENABLE)
-    if (!process_record_hhkb(keycode, record)) {
-        return false;
-    }
-#endif
+hhkb_dip_switch_config_t hhkb_dip_switch_config;
 
-    return true;
-}
+enum layouts { HHKB = 0, WINDOWS = 1, MAC = 2, INVALID = 3 };

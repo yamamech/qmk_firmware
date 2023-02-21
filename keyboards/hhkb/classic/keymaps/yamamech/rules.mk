@@ -1,0 +1,2 @@
+YAMAMECH_HHKB = yes
+DFU_ARGS = -d 1209:db42
