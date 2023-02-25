@@ -1,6 +1,9 @@
 # HHKB Pro Classic (PD-KB401) Userspace
 
-![HHKB keyboard layout](https://github.com/yamamech/hhkb_qmk_resources/blob/main/img/keyboard-layout.png?raw=true)
+### Base Layout
+![HHKB base layout](https://github.com/yamamech/hhkb_qmk_resources/blob/main/img/base-layer.png?raw=true)
+### FN Layout
+![HHKB FN layout](https://github.com/yamamech/hhkb_qmk_resources/blob/main/img/fn-layer.png?raw=true)
 
 ## DIP Switch Configuration
 

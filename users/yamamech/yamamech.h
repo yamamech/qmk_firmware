@@ -19,13 +19,25 @@
 #include "quantum.h"
 // clang-format off
 #define FN      MO(_FN)
+#define FN_ALT  MO(_FN_ALT)
 #define LM_LALT LM(_LM, MOD_LALT)
+
+/* Split layer definitions (mainly for Lily58) */
+#define _RAISE  _FN
+#define _LOWER  _FN_ALT
+#define RAISE   MO(_RAISE)
+#define LOWER   MO(_LOWER)
+#define ADJUST  MO(_ADJUST)
 // clang-format on
 
 #if defined(HHKB_ENABLE)
 #    include "hhkb/hhkb.h"
 #endif
 
-enum layers { _BASE = 0, _FN, _LM };
+enum layers { _BASE = 0, _FN, _FN_ALT, _ADJUST, _LM };
+
+enum userspace_keycodes { EXT_F1 = SAFE_RANGE, EXT_F2, EXT_F3, EXT_F4, EXT_F5, EXT_F6, EXT_F7, EXT_F8, EXT_F9, EXT_F10, EXT_F11, EXT_F12, NEW_SAFE_RANGE };
 
 bool process_record_keymap(uint16_t keycode, keyrecord_t *record);
+
+bool dip_switch_update_mask_keymap(uint32_t state);

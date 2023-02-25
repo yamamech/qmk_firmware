@@ -19,6 +19,7 @@
 #include "quantum.h"
 
 bool process_record_hhkb(uint16_t keycode, keyrecord_t *record);
+
 bool code_if_macos(uint16_t keycode, bool pressed);
 
 typedef union {
