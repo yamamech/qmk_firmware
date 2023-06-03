@@ -32,11 +32,38 @@
 
 #if defined(HHKB_ENABLE)
 #    include "hhkb/hhkb.h"
+#    define HH_BSPC HHKB_BACKSPACE
+#endif
+
+#if defined(SECRETS_ENABLE)
+#    include "secrets/secrets.h"
 #endif
 
 enum layers { _BASE = 0, _FN, _FN_ALT, _ADJUST, _LM };
 
-enum userspace_keycodes { EXT_F1 = SAFE_RANGE, EXT_F2, EXT_F3, EXT_F4, EXT_F5, EXT_F6, EXT_F7, EXT_F8, EXT_F9, EXT_F10, EXT_F11, EXT_F12, NEW_SAFE_RANGE };
+enum userspace_keycodes {
+    EXT_F1 = SAFE_RANGE,
+    EXT_F2,
+    EXT_F3,
+    EXT_F4,
+    EXT_F5,
+    EXT_F6,
+    EXT_F7,
+    EXT_F8,
+    EXT_F9,
+    EXT_F10,
+    EXT_F11,
+    EXT_F12,
+    SECRET1,
+    SECRET2,
+    SECRET3,
+    SECRET4,
+    SECRET5,
+#if defined(HHKB_ENABLE)
+    HHKB_BACKSPACE,
+#endif
+    NEW_SAFE_RANGE
+};
 
 bool process_record_keymap(uint16_t keycode, keyrecord_t *record);
 

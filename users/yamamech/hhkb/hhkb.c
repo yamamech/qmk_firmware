@@ -47,18 +47,21 @@ bool dip_switch_update_mask_user(uint32_t state) {
 
 bool process_record_hhkb(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case KC_BACKSPACE:
+        case HHKB_BACKSPACE:
             // SW3 - Swap backspace and delete
             if (hhkb_dip_switch_config.sw3) {
                 if (record->event.pressed) {
+                    register_code(KC_BACKSPACE);
+                } else {
+                    unregister_code(KC_BACKSPACE);
+                }
+            } else {
+                if (record->event.pressed) {
                     register_code(KC_DELETE);
-                    return false;
                 } else {
                     unregister_code(KC_DELETE);
-                    return false;
                 }
             }
-            return true;
 
         // Layout differences
         case KC_PWR:
@@ -75,19 +78,27 @@ bool process_record_hhkb(uint16_t keycode, keyrecord_t *record) {
         // NUBS and Grave are swapped around on MacOS for some reason (thanks Apple)
         // So we pre-swap them here, so that MacOS swaps them back for us
         case KC_NUBS:
-            return code_if_macos(KC_GRV, record->event.pressed);
+            if (hhkb_dip_switch_config.layout != MAC) {
+                return true;
+            }
+
+            if (record->event.pressed) {
+                register_code(KC_GRV);
+            } else {
+                unregister_code(KC_GRV);
+            }
+            return false;
         case KC_GRV:
-            return code_if_macos(KC_NUBS, record->event.pressed);
+            if (hhkb_dip_switch_config.layout != MAC) {
+                return true;
+            }
+
+            if (record->event.pressed) {
+                register_code(KC_NUBS);
+            } else {
+                unregister_code(KC_NUBS);
+            }
+            return false;
     }
     return true;
-}
-
-bool code_if_macos(uint16_t keycode, bool pressed) {
-    if (hhkb_dip_switch_config.layout != MAC) return true;
-
-    if (pressed)
-        register_code(keycode);
-    else
-        unregister_code(keycode);
-    return false;
 }

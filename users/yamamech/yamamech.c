@@ -48,6 +48,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 set_mods(temp_mod);
             }
             break;
+        case KC_ESCAPE:
+            if (record->event.pressed) {
+                uint8_t temp_mod = get_mods();
+                uint8_t temp_osm = get_oneshot_mods();
+                clear_mods();
+                clear_oneshot_mods();
+                if ((temp_mod | temp_osm) & (MOD_BIT(KC_LEFT_SHIFT) & MOD_BIT(KC_RIGHT_SHIFT))) {
+                    tap_code16(QK_BOOT);
+                }
+                set_mods(temp_mod);
+            }
+            break;
     }
 
     return true;
