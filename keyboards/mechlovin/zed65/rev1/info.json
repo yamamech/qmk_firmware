@@ -20,8 +20,8 @@
         "caps_lock": "B9",
         "on_state": 0
     },
+    "diode_direction": "COL2ROW",
     "rgblight": {
-        "pin": "A7",
         "led_count": 24,
         "sleep": true,
         "animations": {
@@ -38,9 +38,13 @@
         }
     },
     "ws2812": {
+        "pin": "A7",
         "driver": "spi"
     },
     "community_layouts": ["65_ansi_blocker_tsangan"],
+    "layout_aliases": {
+        "LAYOUT_65_ansi_tsangan": "LAYOUT_65_ansi"
+    },
     "layouts": {
         "LAYOUT_65_iso_tsangan_split_bs": {
             "layout": [
@@ -198,7 +202,7 @@
                 {"matrix": [4, 14], "x": 15, "y": 4}
             ]
         },
-        "LAYOUT_65_ansi_tsangan": {
+        "LAYOUT_65_ansi": {
             "layout": [
                 {"matrix": [0, 0], "x": 0, "y": 0},
                 {"matrix": [0, 1], "x": 1, "y": 0},
