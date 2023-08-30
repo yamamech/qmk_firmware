@@ -76,29 +76,34 @@ bool process_record_hhkb(uint16_t keycode, keyrecord_t *record) {
             return true;
 
         // NUBS and Grave are swapped around on MacOS for some reason (thanks Apple)
-        // So we pre-swap them here, so that MacOS swaps them back for us
+        // So we pre-swap them here, so that MacOS swaps them back for us...
+        // Unless you're using an ANSI layout on MacOS in which case Grave works fine,
+        // and NUBS needs to be remapped as NUHS in order to be a Backslash... (once again, thanks Apple)
+        // And unfortunately, we can't use SW6 to figure out which to use because SW6 is used by Dapboot.
+        // So for now, this works under the assumption that the layout in MacOS will be US not GB.
+        // In order to change it to GB, swap the KC_NUHS for KC_GRV; then uncomment the second `case` statement.
         case KC_NUBS:
             if (hhkb_dip_switch_config.layout != MAC) {
                 return true;
             }
 
             if (record->event.pressed) {
-                register_code(KC_GRV);
+                register_code(KC_NUHS);
             } else {
-                unregister_code(KC_GRV);
+                unregister_code(KC_NUHS);
             }
             return false;
-        case KC_GRV:
-            if (hhkb_dip_switch_config.layout != MAC) {
-                return true;
-            }
+            // case KC_GRV:
+            //     if (hhkb_dip_switch_config.layout != MAC) {
+            //         return true;
+            //     }
 
-            if (record->event.pressed) {
-                register_code(KC_NUBS);
-            } else {
-                unregister_code(KC_NUBS);
-            }
-            return false;
+            //     if (record->event.pressed) {
+            //         register_code(KC_NUBS);
+            //     } else {
+            //         unregister_code(KC_NUBS);
+            //     }
+            //     return false;
     }
     return true;
 }
